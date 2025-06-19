@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-2xl text-indigo-600 mr-2"></i>
+                    <span class="text-xl font-bold text-gray-800">FinanceHub</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div id="user-button"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Take Control of Your Financial Future
+            </h1>
+            <p class="text-xl text-gray-600 mb-8">
+                Smart financial management with AI-powered insights and personalized advice
+            </p>
+            
+            <!-- Authentication Section -->
+            <div id="auth-section" class="max-w-md mx-auto">
+                <div id="sign-in" class="hidden">
+                    <h2 class="text-2xl font-semibold mb-6">Welcome Back!</h2>
+                    <div id="sign-in-form"></div>
+                </div>
+                
+                <div id="sign-up" class="hidden">
+                    <h2 class="text-2xl font-semibold mb-6">Get Started Today</h2>
+                    <div id="sign-up-form"></div>
+                </div>
+                
+                <div id="auth-buttons" class="space-y-4">
+                    <button id="show-sign-in" class="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-200 font-semibold">
+                        Sign In
+                    </button>
+                    <button id="show-sign-up" class="w-full bg-white text-indigo-600 border-2 border-indigo-600 py-3 px-6 rounded-lg hover:bg-indigo-50 transition duration-200 font-semibold">
+                        Create Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-600 text-3xl mb-4">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">AI-Powered Advice</h3>
+                <p class="text-gray-600">Get personalized financial recommendations based on your spending patterns and goals.</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-600 text-3xl mb-4">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Smart Analytics</h3>
+                <p class="text-gray-600">Visualize your financial health with comprehensive charts and insights.</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="text-indigo-600 text-3xl mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Secure & Private</h3>
+                <p class="text-gray-600">Your financial data is encrypted and secure with enterprise-grade protection.</p>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Why Choose FinanceHub?</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">Comprehensive Tracking</h4>
+                            <p class="text-gray-600">Monitor income, expenses, savings, and investments in one place.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">Goal Setting</h4>
+                            <p class="text-gray-600">Set and track financial goals with progress monitoring.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">Budget Management</h4>
+                            <p class="text-gray-600">Create and stick to budgets with smart alerts and recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">AI Financial Advisor</h4>
+                            <p class="text-gray-600">Get personalized advice powered by advanced AI technology.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">Real-time Insights</h4>
+                            <p class="text-gray-600">Receive instant feedback on your financial decisions.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold">Mobile Friendly</h4>
+                            <p class="text-gray-600">Access your financial data anywhere, anytime on any device.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2025 FinanceHub. Your financial future starts here.</p>
+        </div>
+    </footer>
+
+    <script>
+        const clerk = Clerk("{{ clerk_publishable_key }}");
+        
+        clerk.load().then(() => {
+            // Check if user is already signed in
+            if (clerk.user) {
+                window.location.href = '/dashboard';
+                return;
+            }
+
+            // Mount user button
+            const userButtonDiv = document.getElementById("user-button");
+            if (userButtonDiv) {
+                clerk.mountUserButton(userButtonDiv);
+            }
+
+            // Handle auth UI
+            const authSection = document.getElementById('auth-section');
+            const authButtons = document.getElementById('auth-buttons');
+            const signInDiv = document.getElementById('sign-in');
+            const signUpDiv = document.getElementById('sign-up');
+            const signInForm = document.getElementById('sign-in-form');
+            const signUpForm = document.getElementById('sign-up-form');
+
+            // Show sign in form
+            document.getElementById('show-sign-in').addEventListener('click', () => {
+                authButtons.classList.add('hidden');
+                signInDiv.classList.remove('hidden');
+                
+                clerk.mountSignIn(signInForm, {
+                    routing: 'hash',
+                    afterSignInUrl: '/dashboard',
+                    appearance: {
+                        elements: {
+                            formButtonPrimary: 'bg-indigo-600 hover:bg-indigo-700',
+                            card: 'shadow-none',
+                        }
+                    }
+                });
+            });
+
+            // Show sign up form
+            document.getElementById('show-sign-up').addEventListener('click', () => {
+                authButtons.classList.add('hidden');
+                signUpDiv.classList.remove('hidden');
+                
+                clerk.mountSignUp(signUpForm, {
+                    routing: 'hash',
+                    afterSignUpUrl: '/dashboard',
+                    appearance: {
+                        elements: {
+                            formButtonPrimary: 'bg-indigo-600 hover:bg-indigo-700',
+                            card: 'shadow-none',
+                        }
+                    }
+                });
+            });
+
+            // Listen for authentication events
+            clerk.addListener('user', (user) => {
+                if (user) {
+                    window.location.href = '/dashboard';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
